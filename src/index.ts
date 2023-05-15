@@ -4,9 +4,6 @@ const isString = (val: unknown) => typeof val === "string" || val instanceof Str
 
 export default async function Command() {
   const text = await Clipboard.readText();
-
-  if (text == null) {
-    throw new Error("No text in clipboard");
-  }
+  if (!text) throw new Error("No text in clipboard");
   await Clipboard.paste(isString(text) ? text.trim() : text);
 }
